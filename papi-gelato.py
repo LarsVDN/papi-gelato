@@ -24,9 +24,8 @@
 #
 # Let op: Programmeer zo DRY mogelijk en gebruik duidelijke beschrijvenende namen voor je functies en variabelen.
 #
-#
 
-
+max = 8
 
 def error():
     print("Sorry dat snap ik niet...")
@@ -36,36 +35,42 @@ def vraagBolletjes():
     while not aantalok:
         try:
             aantal = int(input("Hoeveel bolletjes wilt u? "))
+            if aantal > max:
+                print("Sorry, zulke grote bakken hebben wij niet")
             aantalok = True
         except ValueError:
             print("U mag alleen cijfers invoeren")
-    return aantal
 
+    return aantal
 
 def vraagBakHoorn(aantal):
     a = 'hoorntje'
     b = 'bakje'
-    max = 8
 
-    if aantal <=4:
-        while True:
-            vraagHB = input("Wilt u deze " + str(aantal) + " bolletje(s) in een hoorntje of een bakje? ")
+    while True:
+        vraagHB = input("Wilt u deze " + str(aantal) + " bolletje(s) in een hoorntje of een bakje? ")
 
-            if vraagHB in [a,b]:
-                return vraagHB
-            else:
-                print("U mag alleen 'hoorntje' of 'bakje' invoeren")
-    elif aantal >=4 and aantal <=max:
-
-        print("Dan krijgt u van mij een " + str(b) + " met " + str(aantal) + " bolletjes")
-    elif aantal > max:
-        print("Sorry, zulke grote bakken hebben wij niet")
-
-
+        if vraagHB in [a,b]:
+            return vraagHB
+        else:
+            print("U mag alleen 'hoorntje' of 'bakje' invoeren")
 
 def main(): # Stap 1
-    bolletjes = vraagBolletjes()
-    bakHoorntje = vraagBakHoorn(bolletjes)
+    while True:
+        bolletjes = vraagBolletjes()
+        if bolletjes <= 4:
+            bakHoorntje = vraagBakHoorn(bolletjes)
+        elif bolletjes > 4 and bolletjes <= 8:
+            bakHoorntje = 'bakje'
+        elif bolletjes > 8:
+            return
+        bakHoorntje = 'bakje'
+        meerBestellen = input("U krijgt van mij een " + bakHoorntje + " met " + str(bolletjes) + " bolletjes. \n" + "Wilt U nog meer bestellen? (Y/N) ")
+        if meerBestellen in ['n','N']:
+            print("Tot ziens!")
+            return
+
+
 
 print("Welkom bij Papi Gelato je mag alle smaken kiezen zolang het maar vanille ijs is.")
 main()
@@ -85,3 +90,8 @@ main()
 # elif aantal > max:
 #     print("Sorry, zulke grote bakken hebben we niet")
 #     start()
+
+# if aantal >=4 and aantal <=max:
+#     print("Dan krijgt u van mij een " + str(b) + " met " + str(aantal) + " bolletjes")
+# elif aantal > max:
+#     print("Sorry, zulke grote bakken hebben wij niet")
