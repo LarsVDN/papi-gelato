@@ -58,13 +58,13 @@ def vraagBakHoorn(aantal):
 def main(): # Stap 1
     while True:
         bolletjes = vraagBolletjes()
+        bakHoorntje = 'bakje'
         if bolletjes <= 4:
             bakHoorntje = vraagBakHoorn(bolletjes)
         elif bolletjes > 4 and bolletjes <= 8:
             bakHoorntje = 'bakje'
         elif bolletjes > 8:
-            return
-        bakHoorntje = 'bakje'
+            continue
         meerBestellen = input("U krijgt van mij een " + bakHoorntje + " met " + str(bolletjes) + " bolletjes. \n" + "Wilt U nog meer bestellen? (Y/N) ")
         if meerBestellen in ['n','N']:
             print("Tot ziens!")
